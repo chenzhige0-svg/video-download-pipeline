@@ -1,0 +1,63 @@
+# ---- 下载成品：视频、音频、字幕、讲义、压缩包 ----
+*.mp4
+*.mkv
+*.webm
+*.flv
+*.mov
+*.avi
+*.m4a
+*.mp3
+*.wav
+*.flac
+*.opus
+*.srt
+*.vtt
+*.ass
+*.lrc
+*.pdf
+*.zip
+*.7z
+*.rar
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.log
+*.part
+*.ytdl
+
+# ---- 运行时目录 ----
+/.tmp/
+/.archive/
+/.chrome-ytdlp/
+
+# ---- 平台成品目录：只保留占位文件 ----
+/bilibili/*
+!/bilibili/.gitkeep
+/douyin/*
+!/douyin/.gitkeep
+/tiktok/*
+!/tiktok/.gitkeep
+/weibo/*
+!/weibo/.gitkeep
+/xiaohongshu/*
+!/xiaohongshu/.gitkeep
+/youtube/*
+!/youtube/.gitkeep
+
+# ---- cookie：真实凭据不入库 ----
+/.cookies/*
+!/.cookies/_template.txt
+!/.cookies/README.md
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- 系统 ----
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,40 @@
+# yt-dlp 全局配置模板
+# 用 scripts/install-config.ps1 生成实际配置，模板里的根目录占位符会被替换成实际路径。
+# 实际文件位置：C:\scoop\persist\yt-dlp\yt-dlp.conf（scoop），否则 %APPDATA%\yt-dlp\config。
+
+# ---- YouTube JS 挑战求解器 ----
+# 本机只有 node 时不写这行会退化成 "some formats may be missing"
+--js-runtimes node
+
+# ---- Cookie ----
+# 抖音/小红书/B 站不登录基本下不动。all.txt 由 scripts/cookie-export.py 生成。
+# yt-dlp 只发送与目标域名匹配的 cookie，不会把 B 站 cookie 发给抖音。
+--cookies "{{ROOT}}/.cookies/all.txt"
+
+# ---- 分类目录：平台 / 播放列表 / 作者 / 文件 ----
+# %(extractor)s 是 yt-dlp 的站点名（youtube / bilibili / douyin ...），新平台自动建文件夹
+# %(playlist|No Playlist)s 让每个播放列表单独一层，单集视频落到 No Playlist
+# %(uploader|unknown)s 取不到作者时落到 unknown
+-P "{{ROOT}}"
+-o "%(extractor)s/%(playlist|No Playlist)s/%(uploader|unknown)s/%(title)s [%(id)s].%(ext)s"
+
+# 未下完的分片放 .tmp，下完再移动到正式目录（同盘，瞬间完成）
+-P "temp:{{ROOT}}/.tmp"
+
+# ---- 下载质量 ----
+# 同分辨率下挑码率最高的。B 站 AV1 码率给得低（1080p 只有 764k），
+# 不加这行会默认选 AV1，画质明显不如 H.264 的 2800k。
+-S "res,br"
+-f "bv*+ba/b"
+--merge-output-format mp4
+--embed-metadata
+
+# ---- 稳定性 ----
+--concurrent-fragments 4
+--retries 10
+--fragment-retries 10
+
+# ---- 字幕（需要时取消注释）----
+# --write-subs
+# --sub-langs "en.*,zh.*"
+# --convert-subs srt

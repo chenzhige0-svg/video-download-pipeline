@@ -1,0 +1,3 @@
+# Netscape HTTP Cookie File
+# 示例文件，真实值由 scripts/cookie-export.py 生成
+.example.com	TRUE	/	FALSE	0	example_cookie	example_value
